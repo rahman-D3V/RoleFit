@@ -3,34 +3,38 @@
 import { colors } from "@/config/colors";
 import { useUser } from "@/stores/userStore";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React from "react";
+import { useForm } from "react-hook-form";
 
-const SignUp = () => {
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+export default function SignUp() {
   const router = useRouter();
-  const setIsUserLogin = useUser((s) => s.setIsUserLogin)
+  const setIsUserLogin = useUser((s) => s.setIsUserLogin);
 
-  function handleCreateAccount() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
     const authData = {
-      userName,
-      email,
-      password,
+      userName: data.userName,
+      email: data.email,
+      password: data.password,
       isLogin: true,
     };
 
     try {
       localStorage.setItem("auth-data", JSON.stringify(authData));
+      setIsUserLogin(true);
       alert("Account Created");
-      setIsUserLogin(true)
+      router.push("/");
     } catch (error) {
-      alert(error);
+      // keep this simple for the prototype
+      alert("Failed to save account");
+      console.error(error);
     }
-
-    router.push("/");
-  }
+  };
 
   return (
     <div
@@ -65,41 +69,61 @@ const SignUp = () => {
       </p>
 
       {/* Form */}
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-3 mb-3">
           <label className="block text-sm">Username</label>
           <input
-            onChange={(e) => setUserName(e.target.value)}
+            {...register("userName", { required: "username is required" })}
             className="w-full p-3 rounded-md border"
             style={{ borderColor: "rgba(0,0,0,0.06)" }}
             placeholder="Enter username"
             type="text"
           />
+          {errors.userName && (
+            <p className="text-xs mt-1" style={{ color: "#B04434" }}>
+              {errors.userName.message}
+            </p>
+          )}
 
           <label className="block text-sm">Email</label>
           <input
-            onChange={(e) => setEmail(e.target.value)}
+            {...register("email", {
+              required: "email is required",
+              pattern: {
+                value: /^\S+@\S+\.\S+$/,
+                message: "Invalid email address",
+              },
+            })}
             className="w-full p-3 rounded-md border"
             style={{ borderColor: "rgba(0,0,0,0.06)" }}
             placeholder="you@example.com"
             type="email"
           />
+          {errors.email && (
+            <p className="text-xs mt-1" style={{ color: "#B04434" }}>
+              {errors.email.message}
+            </p>
+          )}
 
           <label className="block text-sm">Password</label>
           <input
-            onChange={(e) => setPassword(e.target.value)}
+            {...register("password", { required: "password is required" })}
             className="w-full p-3 rounded-md border"
             style={{ borderColor: "rgba(0,0,0,0.06)" }}
             placeholder="Create a password"
             type="password"
           />
+          {errors.password && (
+            <p className="text-xs mt-1" style={{ color: "#B04434" }}>
+              {errors.password.message}
+            </p>
+          )}
         </div>
 
         {/* Actions */}
         <div className="flex flex-col gap-3">
           <button
-            onClick={handleCreateAccount}
-            type="button"
+            type="submit"
             className="w-full p-3 rounded-md text-white font-medium"
             style={{ background: colors.deepTeal }}
           >
@@ -113,6 +137,4 @@ const SignUp = () => {
       </div>
     </div>
   );
-};
-
-export default SignUp;
+}
