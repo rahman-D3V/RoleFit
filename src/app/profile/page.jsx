@@ -198,6 +198,48 @@ export default function ProfileUI() {
               )}
             </div>
 
+            <div>
+              <label className="block text-sm font-medium mb-2">
+                Highest Qualification{" "}
+                <span style={{ color: colors.deepTeal }}>*</span>
+              </label>
+
+              <input
+                {...register("qualification", {
+                  required: "Highest qualification is required",
+                  minLength: {
+                    value: 3,
+                    message: "Qualification must be at least 3 characters",
+                  },
+                })}
+                type="text"
+                placeholder="e.g. Bachelor's in Computer Science"
+                className="w-full px-4 py-3 rounded-lg border transition-all focus:outline-none focus:ring-2 focus:border-transparent"
+                style={{
+                  borderColor: errors.qualification
+                    ? "#B04434"
+                    : "rgba(0,0,0,0.08)",
+                  backgroundColor: colors.softIvory,
+                }}
+                onFocus={(e) => {
+                  e.target.style.ringColor = colors.deepTeal;
+                  e.target.style.backgroundColor = "white";
+                }}
+                onBlur={(e) => {
+                  e.target.style.backgroundColor = colors.softIvory;
+                }}
+              />
+
+              {errors.qualification && (
+                <p
+                  className="text-xs mt-2 flex items-center gap-1"
+                  style={{ color: "#B04434" }}
+                >
+                  <span>⚠</span> {errors.qualification.message}
+                </p>
+              )}
+            </div>
+
             {/* Work Authorization */}
             <div>
               <label className="block text-sm font-medium mb-2">

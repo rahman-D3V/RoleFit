@@ -28,7 +28,7 @@ export default function SignUp() {
       localStorage.setItem("auth-data", JSON.stringify(authData));
       setIsUserLogin(true);
       alert("Account Created");
-      router.push("/");
+      router.push("/profile");
     } catch (error) {
       // keep this simple for the prototype
       alert("Failed to save account");
