@@ -1,3 +1,4 @@
+// app/api/generate/route.js
 import { NextResponse } from "next/server";
 import { GoogleGenAI } from "@google/genai";
 
@@ -6,7 +7,7 @@ export async function POST(request) {
     const { prompt } = await request.json();
 
     const ai = new GoogleGenAI({
-      apiKey: "API_KEY",
+      apiKey: "AIzaSyAJiC4EWmm-k9CoEcFZPLcBi-yfC_ruZfU",
     });
 
     const response = await ai.models.generateContent({
@@ -14,6 +15,7 @@ export async function POST(request) {
       contents: prompt,
     });
 
+    // Try to parse JSON text and return an object
     try {
       const parsed = JSON.parse(response.text);
       return NextResponse.json(parsed);

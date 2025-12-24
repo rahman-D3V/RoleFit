@@ -3,16 +3,20 @@
 import { colors } from "@/config/colors";
 import { useUser } from "@/stores/userStore";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function Login() {
   const setIsUserLogin = useUser((s) => s.setIsUserLogin);
   const router = useRouter();
 
+  const [isSigningIn, setIsSigningIn] = useState(false);
+  const [isCredentialsError, setIsCredentialsError] = useState(false);
+
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -29,19 +33,31 @@ export default function Login() {
         authData.userName === data.userName &&
         authData.password === data.password
       ) {
+        setIsSigningIn(true);
         const updated = { ...authData, isLogin: true };
         localStorage.setItem("auth-data", JSON.stringify(updated));
         setIsUserLogin(true);
-        alert("Sign in successful");
-        router.push("/profile");
+
+        setTimeout(() => {
+          setIsSigningIn(false);
+          router.push("/profile");
+        }, 1500);
       } else {
-        alert("Invalid credentials");
+        setIsCredentialsError(true);
+        setTimeout(() => {
+          setIsCredentialsError(false);
+        }, 1500);
       }
     } catch (err) {
       console.error(err);
       alert("An error occurred while signing in");
     }
   };
+
+  function handleRef() {
+    setValue("userName", "User01");
+    setValue("password", "user111");
+  }
 
   return (
     <div className="rounded-xl p-6 shadow-md" style={{ background: "white" }}>
@@ -67,6 +83,14 @@ export default function Login() {
       <p className="text-sm text-gray-600 mb-6">
         Enter your username and password to sign in.
       </p>
+
+      {isCredentialsError && (
+        <div className="mb-6 px-4 py-2 rounded-md bg-red-50 border border-red-300">
+          <span className="text-sm text-red-700 font-medium">
+            Invalid credentials
+          </span>
+        </div>
+      )}
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <label className="block text-sm mb-2">Username</label>
@@ -97,19 +121,38 @@ export default function Login() {
           </p>
         )}
 
-        <button
-          type="submit"
-          className="w-full p-3 rounded-md text-white font-medium mt-2"
-          style={{ background: colors.deepTeal }}
-        >
-          Continue
-        </button>
+        {isSigningIn ? (
+          <button
+            type="submit"
+            className="w-full animate-pulse p-3 rounded-md text-white font-medium mt-2"
+            style={{ background: colors.deepTeal }}
+          >
+            signing in...
+          </button>
+        ) : (
+          <button
+            type="submit"
+            className="w-full p-3 rounded-md text-white font-medium mt-2"
+            style={{ background: colors.deepTeal }}
+          >
+            Continue
+          </button>
+        )}
       </form>
 
       <div className="text-xs text-gray-500 mt-4">
         By continuing you agree this is a prototype demo. Your info stays in
         your browser.
       </div>
+
+      <button
+        className="px-3 py-1.5 mt-2 rounded-md cursor-pointer text-sm bg-teal-50 text-teal-700 hover:bg-teal-100"
+        onClick={handleRef}
+      >
+        Use demo credentials
+      </button>
     </div>
   );
 }
+
+// signing in...

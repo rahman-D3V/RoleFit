@@ -1,4 +1,5 @@
 "use client"
+import Navbar from "@/components/navbar";
 import { colors } from "@/config/colors";
 import { useUser } from "@/stores/userStore";
 import { useRouter } from "next/navigation";
@@ -36,38 +37,7 @@ const MatchifyLanding = () => {
       style={{ backgroundColor: colors.softIvory }}
     >
       {/* Navigation */}
-      <nav className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <div
-              className="w-11 h-11 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-sm"
-              style={{ backgroundColor: colors.deepTeal }}
-            >
-              M
-            </div>
-            <span
-              className="text-xl font-bold tracking-tight"
-              style={{ color: colors.carbonGray }}
-            >
-              Matchify
-            </span>
-          </div>
-          <div className="flex gap-2">
-            <button onClick={() => router.push("/login")}
-              className="px-6 py-2.5 text-sm font-medium rounded-lg transition-all hover:bg-gray-50"
-              style={{ color: colors.carbonGray }}
-            >
-              {isUserLogin ? <button onClick={handleLogout}>Logout</button> : <button>Login</button>}
-            </button>
-            <button
-              className="px-6 py-2.5 text-sm font-semibold text-white rounded-lg shadow-md transition-all hover:shadow-lg hover:-translate-y-0.5"
-              style={{ backgroundColor: colors.deepTeal }}
-            >
-              Get Started
-            </button>
-          </div>
-        </div>
-      </nav>
+      <Navbar/>
 
       {/* Hero Section */}
       <section
