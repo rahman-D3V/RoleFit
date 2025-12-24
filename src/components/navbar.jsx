@@ -1,7 +1,7 @@
 import { colors } from "@/config/colors";
 import React, { useEffect, useState } from "react";
 import { useUser } from "@/stores/userStore";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import LogoutToast from "./logoutToast";
 
 const Navbar = () => {
@@ -9,6 +9,8 @@ const Navbar = () => {
   const isUserLogin = useUser((s) => s.isUserLogin);
   const setIsUserLogin = useUser((s) => s.setIsUserLogin);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const pathname = usePathname();
 
   let authData = JSON.parse(localStorage.getItem("auth-data"));
 
@@ -33,6 +35,9 @@ const Navbar = () => {
       setIsUserLogin(authData.isLogin);
     }, []);
   }
+
+  
+
   return (
     <nav className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-4 flex justify-between items-center">
@@ -62,12 +67,14 @@ const Navbar = () => {
             {authData.isLogin ? "Logout" : "Login"}
           </button>
 
-          <button
-            className="px-6 py-2.5 cursor-pointer text-sm font-semibold text-white rounded-lg shadow-md transition-all hover:shadow-lg hover:-translate-y-0.5"
-            style={{ backgroundColor: colors.deepTeal }}
-          >
-            Get Started
-          </button>
+          <a href="#works">
+            <button
+              className="px-6 py-2.5 cursor-pointer text-sm font-semibold text-white rounded-lg shadow-md transition-all hover:shadow-lg hover:-translate-y-0.5"
+              style={{ backgroundColor: colors.deepTeal }}
+            >
+              How it works
+            </button>
+          </a>
         </div>
       </div>
 

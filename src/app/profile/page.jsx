@@ -37,6 +37,19 @@ export default function ProfileUI() {
     }, 500);
   }
 
+  useEffect(() => {
+    try {
+      let authData = JSON.parse(localStorage.getItem("auth-data"));
+      if(authData?.isLogin) return;
+      if (!authData?.isLogin) {
+      router.push("/");
+    }
+    } catch (error) {
+      alert(error);
+    }
+    
+  }, []);
+
   // redirect AFTER submitting is done
   useEffect(() => {
     if (!isSubmitting && redirectToAnalyzerPage) {

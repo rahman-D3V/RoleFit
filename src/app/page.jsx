@@ -283,7 +283,7 @@ const MatchifyLanding = () => {
       </section>
 
       {/* How It Works */}
-      <section
+      <section id="works"
         className="py-24 px-6"
         style={{ backgroundColor: colors.warmSand }}
       >

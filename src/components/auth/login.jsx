@@ -12,6 +12,7 @@ export default function Login() {
 
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [isCredentialsError, setIsCredentialsError] = useState(false);
+  const [isAuthData, setIsAuthData] = useState(false)
 
   const {
     register,
@@ -25,7 +26,10 @@ export default function Login() {
       const authData = JSON.parse(localStorage.getItem("auth-data") || "null");
 
       if (!authData) {
-        alert("No account found. Please sign up first.");
+        setIsAuthData(true)
+        setTimeout(() => {
+          setIsAuthData(false)
+        }, 2000);
         return;
       }
 
@@ -91,6 +95,16 @@ export default function Login() {
           </span>
         </div>
       )}
+
+      {isAuthData && (
+        <div className="mb-6 px-4 py-2 rounded-md bg-red-50 border border-red-300">
+          <span className="text-sm text-red-700 font-medium">
+           No account found. Please create an account.
+          </span>
+        </div>
+      )}
+
+
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <label className="block text-sm mb-2">Username</label>

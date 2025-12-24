@@ -1,12 +1,15 @@
 "use client";
 
 import { colors } from "@/config/colors";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export default function AnalyzerPageUI() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysis, setAnalysis] = useState(null);
   const [jdText, setJdText] = useState("");
+
+  const router = useRouter()
 
   // Build prompt when component mounts or jdText changes
   const buildPrompt = (userData, jobDescription) => {
@@ -222,6 +225,19 @@ Output EXACTLY this JSON shape (fill fields realistically):
   );
 
   const verdictConfig = analysis ? getVerdictConfig(analysis.job_analysis.final_verdict) : null;
+
+  useEffect(() => {
+      try {
+        let authData = JSON.parse(localStorage.getItem("auth-data"));
+        if(authData?.isLogin) return;
+        if (!authData?.isLogin) {
+        router.push("/");
+      }
+      } catch (error) {
+        alert(error);
+      }
+      
+    }, []);
 
   return (
     <div className="min-h-screen" style={{ background: "linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)" }}>
