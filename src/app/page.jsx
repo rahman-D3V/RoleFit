@@ -1,35 +1,51 @@
-"use client"
+"use client";
 import Navbar from "@/components/navbar";
 import { colors } from "@/config/colors";
 import { useUser } from "@/stores/userStore";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const MatchifyLanding = () => {
-  const router = useRouter()
-  const isUserLogin = useUser((s) => s.isUserLogin)
-  const setIsUserLogin = useUser((s) => s.setIsUserLogin)
+  const router = useRouter();
+  const isUserLogin = useUser((s) => s.isUserLogin);
+  const setIsUserLogin = useUser((s) => s.setIsUserLogin);
 
-  function handleLogout(){
+  const [localAuthData,setLocalAuthData] = useState(null)
+
+  function handleLogout() {
     try {
-      let authData = JSON.parse(localStorage.getItem("auth-data"))
-      authData = {...authData, isLogin:false}
-      localStorage.setItem("auth-data", JSON.stringify(authData))
+      let authData = JSON.parse(localStorage.getItem("auth-data"));
+      authData = { ...authData, isLogin: false };
+      localStorage.setItem("auth-data", JSON.stringify(authData));
     } catch (error) {
-      alert(error)
+      alert(error);
+    }
+  }
+
+  function handleStartFree() {
+    try {
+      let authData = JSON.parse(localStorage.getItem("auth-data"));
+      if (authData?.isLogin) {
+        router.push("/jd-analyzer");
+      } else {
+        router.push("/login");
+      }
+    } catch (error) {
+      alert(error);
     }
   }
 
   useEffect(() => {
     try {
-      let authData = JSON.parse(localStorage.getItem("auth-data"))
-      if(authData){
-        setIsUserLogin(authData?.isLogin)
+      let authData = JSON.parse(localStorage.getItem("auth-data"));
+      if (authData) {
+        setIsUserLogin(authData?.isLogin);
+        setLocalAuthData(authData)
       }
     } catch (error) {
-      alert(error)
+      alert(error);
     }
-  }, [])
+  }, []);
 
   return (
     <div
@@ -37,7 +53,7 @@ const MatchifyLanding = () => {
       style={{ backgroundColor: colors.softIvory }}
     >
       {/* Navigation */}
-      <Navbar/>
+      <Navbar />
 
       {/* Hero Section */}
       <section
@@ -46,17 +62,17 @@ const MatchifyLanding = () => {
       >
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-6">
-            <div
+            {isUserLogin && <div
               className="inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-2"
               style={{ backgroundColor: colors.deepTeal, color: colors.white }}
             >
-              Beta • Now Live
-            </div>
+              {`Hey, ${localAuthData?.userName}`}
+            </div>}
             <h1
               className="text-5xl lg:text-6xl font-bold leading-tight tracking-tight"
               style={{ color: colors.carbonGray }}
             >
-              Know your chances before committing{" "}
+              Know your chances before applying{" "}
               <span style={{ color: colors.deepTeal }}>to an application</span>
             </h1>
             <p
@@ -64,23 +80,15 @@ const MatchifyLanding = () => {
               style={{ color: colors.carbonGray, opacity: 0.75 }}
             >
               Paste any remote job description and get instant insights on match
-              score, skill alignment, and culture fit—all before you hit apply.
+              score, skill alignment and culture fit before you hit apply.
             </p>
             <div className="flex flex-wrap gap-4 pt-4">
               <button
                 className="px-8 py-4 font-semibold text-white rounded-xl shadow-lg transition-all hover:shadow-xl hover:-translate-y-1 active:translate-y-0"
                 style={{ backgroundColor: colors.deepTeal }}
+                onClick={handleStartFree}
               >
                 Get Started Free →
-              </button>
-              <button
-                className="px-8 py-4 font-medium rounded-xl border-2 transition-all hover:bg-white/50 hover:-translate-y-0.5"
-                style={{
-                  color: colors.carbonGray,
-                  borderColor: colors.carbonGray,
-                }}
-              >
-                Watch Demo
               </button>
             </div>
             <p
@@ -208,7 +216,7 @@ const MatchifyLanding = () => {
               className="text-4xl lg:text-5xl font-bold mb-4"
               style={{ color: colors.carbonGray }}
             >
-              Why Matchify works
+              Why RoleFit works
             </h2>
             <p
               className="text-lg max-w-2xl mx-auto"
@@ -283,7 +291,8 @@ const MatchifyLanding = () => {
       </section>
 
       {/* How It Works */}
-      <section id="works"
+      <section
+        id="works"
         className="py-24 px-6"
         style={{ backgroundColor: colors.warmSand }}
       >
@@ -402,8 +411,8 @@ const MatchifyLanding = () => {
               className="leading-relaxed"
               style={{ color: colors.carbonGray, opacity: 0.7 }}
             >
-              The more you use Matchify, the better it gets at understanding
-              your preferences and suggesting perfect-fit roles.
+              The more you use RoleFit, the better it gets at understanding your
+              preferences and suggesting perfect-fit roles.
             </p>
           </div>
         </div>
@@ -425,6 +434,7 @@ const MatchifyLanding = () => {
           <button
             className="px-10 py-4 text-lg font-semibold rounded-xl shadow-xl transition-all hover:shadow-2xl hover:-translate-y-1"
             style={{ backgroundColor: colors.white, color: colors.deepTeal }}
+            onClick={() => router.push("/login")}
           >
             Start Matching Jobs Free →
           </button>
@@ -441,7 +451,7 @@ const MatchifyLanding = () => {
             className="text-xs font-medium"
             style={{ color: colors.carbonGray, opacity: 0.5 }}
           >
-            Matchify • v0.2 • Built for remote workers
+            RoleFit • v0.2 • Built for remote workers
           </p>
         </div>
       </footer>

@@ -44,7 +44,7 @@ export default function Login() {
 
         setTimeout(() => {
           setIsSigningIn(false);
-          router.push("/profile");
+          router.push("/");
         }, 1500);
       } else {
         setIsCredentialsError(true);

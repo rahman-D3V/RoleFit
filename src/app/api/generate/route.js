@@ -7,7 +7,7 @@ export async function POST(request) {
     const { prompt } = await request.json();
 
     const ai = new GoogleGenAI({
-      apiKey: "AIzaSyAJiC4EWmm-k9CoEcFZPLcBi-yfC_ruZfU",
+      apiKey: "AIzaSyB96Ua1BKxJXXAhrc-cJeJtr--QFuslKPo",
     });
 
     const response = await ai.models.generateContent({
