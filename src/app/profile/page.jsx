@@ -6,7 +6,7 @@ import { useUser } from "@/stores/userStore";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
- import {HiOutlineUserCircle} from 'react-icons/hi'
+import {HiOutlineUserCircle, HiOutlineX} from 'react-icons/hi'
 
 export default function ProfileUI() {
   const [userInfo, setUserInfo] = useState();
@@ -105,20 +105,8 @@ export default function ProfileUI() {
               aria-label="Close profile summary"
               tabIndex={0}
             >
-              <svg
-                width={22}
-                height={22}
-                viewBox="0 0 22 22"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2.2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                style={{ display: "block" }}
-              >
-                <line x1="6" y1="6" x2="16" y2="16" />
-                <line x1="16" y1="6" x2="6" y2="16" />
-              </svg>
+              <HiOutlineX className="cursor-pointer" size={22} />
+
             </button>
             <div className="p-7 pt-8">
               <h3 className="mb-5 text-lg font-bold text-gray-800 tracking-tight">
@@ -196,7 +184,7 @@ export default function ProfileUI() {
                 }}
                 className="flex items-center justify-center text-white font-bold text-2xl shadow-md"
               >
-                M
+                RF
               </div>
               <div className="flex-1">
                 <h1 className="text-2xl font-bold mb-1">Build your profile</h1>
@@ -216,7 +204,6 @@ export default function ProfileUI() {
               }}
             >
               <span className="text-teal-600">
-                {/* Using HiOutlineUserCircle from react-icons/hi as a profile/user icon */}
                 <HiOutlineUserCircle size={20} />
               </span>
               See your profile summary
@@ -224,7 +211,6 @@ export default function ProfileUI() {
 
             {/* Form */}
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              {/* ---- your entire form remains unchanged ---- */}
 
               <div>
                 <label className="block text-sm font-medium mb-2">

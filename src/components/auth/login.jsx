@@ -5,6 +5,7 @@ import { useUser } from "@/stores/userStore";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { HiEye, HiEyeOff } from "react-icons/hi";
 
 export default function Login() {
   const setIsUserLogin = useUser((s) => s.setIsUserLogin);
@@ -12,7 +13,8 @@ export default function Login() {
 
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [isCredentialsError, setIsCredentialsError] = useState(false);
-  const [isAuthData, setIsAuthData] = useState(false)
+  const [isAuthData, setIsAuthData] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -26,9 +28,9 @@ export default function Login() {
       const authData = JSON.parse(localStorage.getItem("auth-data") || "null");
 
       if (!authData) {
-        setIsAuthData(true)
+        setIsAuthData(true);
         setTimeout(() => {
-          setIsAuthData(false)
+          setIsAuthData(false);
         }, 2000);
         return;
       }
@@ -75,10 +77,10 @@ export default function Login() {
           }}
           className="flex items-center justify-center text-white font-semibold"
         >
-          M
+          RF
         </div>
         <div>
-          <div className="font-semibold">Matchify</div>
+          <div className="font-semibold">RoleFit</div>
           <div className="text-xs text-gray-600">Quick sign-in</div>
         </div>
       </div>
@@ -99,38 +101,47 @@ export default function Login() {
       {isAuthData && (
         <div className="mb-6 px-4 py-2 rounded-md bg-red-50 border border-red-300">
           <span className="text-sm text-red-700 font-medium">
-           No account found. Please create an account.
+            No account found. Please create an account.
           </span>
         </div>
       )}
 
-
-
       <form onSubmit={handleSubmit(onSubmit)}>
         <label className="block text-sm mb-2">Username</label>
         <input
-          {...register("userName", { required: "this field is required" })}
-          className="w-full p-3 rounded-md mb-4 border"
+          {...register("userName", { required: "Username is required" })}
+          className="w-full p-3 rounded-md mb-2 border"
           style={{ borderColor: "rgba(0,0,0,0.06)" }}
           placeholder="Enter username"
           type="text"
         />
         {errors.userName && (
-          <p className="text-xs mt-1" style={{ color: "#B04434" }}>
+          <p className="text-xs mt-1 mb-2" style={{ color: "#B04434" }}>
             {errors.userName.message}
           </p>
         )}
 
         <label className="block text-sm mb-2">Password</label>
-        <input
-          {...register("password", { required: "this field is required" })}
-          className="w-full p-3 rounded-md mb-4 border"
-          style={{ borderColor: "rgba(0,0,0,0.06)" }}
-          placeholder="Enter password"
-          type="password"
-        />
+        <div className="relative">
+          <input
+            {...register("password", { required: "Password is required" })}
+            className="w-full p-3 rounded-md mb-2 border pr-10"
+            style={{ borderColor: "rgba(0,0,0,0.06)" }}
+            placeholder="Enter password"
+            type={showPassword ? "text" : "password"}
+          />
+          <div
+            onClick={() => setShowPassword((prev) => !prev)}
+            className="absolute top-[25px] right-3 transform -translate-y-1/2 text-gray-400 cursor-pointer"
+            tabIndex={0}
+            role="button"
+            aria-label={showPassword ? "Hide password" : "Show password"}
+          >
+            {showPassword ? <HiEye size={17} />  :  <HiEyeOff size={17} />}
+          </div>
+        </div>
         {errors.password && (
-          <p className="text-xs mt-1" style={{ color: "#B04434" }}>
+          <p className="text-xs mt-1 mb-1" style={{ color: "#B04434" }}>
             {errors.password.message}
           </p>
         )}

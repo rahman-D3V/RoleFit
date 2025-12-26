@@ -16,7 +16,7 @@ const Navbar = () => {
 
   const pathname = usePathname();
 
-  let authData = null; //fix
+  let authData = null;
 
   if (typeof window !== "undefined") {
     authData = JSON.parse(localStorage.getItem("auth-data"));
@@ -39,9 +39,9 @@ const Navbar = () => {
       router.push("/");
     }, 1500);
 
-    useEffect(() => {
+    
       setIsUserLogin(authData.isLogin);
-    }, []);
+   
   }
 
   // Navigation buttons reusable content

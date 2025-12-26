@@ -3,16 +3,16 @@
 import { colors } from "@/config/colors";
 import { useUser } from "@/stores/userStore";
 import { useRouter } from "next/navigation";
-import React, { useRef, useState } from "react";
+import React, {useState} from "react";
 import { useForm } from "react-hook-form";
+import { HiEye, HiEyeOff } from "react-icons/hi";
 
 export default function SignUp() {
   const router = useRouter();
   const setIsUserLogin = useUser((s) => s.setIsUserLogin);
 
   const [isAccountCreating, setIsAccountCreating] = useState(false);
-
-  const emailRef = useRef(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -69,17 +69,17 @@ export default function SignUp() {
           }}
           className="flex items-center justify-center text-white font-semibold"
         >
-          M
+          RF
         </div>
         <div>
-          <div className="font-semibold text-lg">Matchify</div>
+          <div className="font-semibold text-lg">RoleFit</div>
           <div className="text-xs text-gray-500">Create your account</div>
         </div>
       </div>
 
       <h2 className="text-2xl font-semibold mb-2">Sign up</h2>
       <p className="text-sm text-gray-600 mb-6">
-        Create a free Matchify account to get started.
+        Create a free RoleFit account to get started.
       </p>
 
       {/* Form */}
@@ -121,13 +121,24 @@ export default function SignUp() {
           )}
 
           <label className="block text-sm">Password</label>
-          <input
-            {...register("password", { required: "password is required" })}
-            className="w-full p-3 rounded-md border"
-            style={{ borderColor: "rgba(0,0,0,0.06)" }}
-            placeholder="Create a password"
-            type="password"
-          />
+          <div className="relative">
+            <input
+              {...register("password", { required: "password is required" })}
+              className="w-full p-3 rounded-md border pr-10"
+              style={{ borderColor: "rgba(0,0,0,0.06)" }}
+              placeholder="Create a password"
+              type={showPassword ? "text" : "password"}
+            />
+            <div
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute top-[22px] right-3 transform -translate-y-1/2 text-gray-400 cursor-pointer"
+              tabIndex={0}
+              role="button"
+              aria-label={showPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword ? <HiEye size={17} /> : <HiEyeOff size={17} />}
+            </div>
+          </div>
           {errors.password && (
             <p className="text-xs mt-1" style={{ color: "#B04434" }}>
               {errors.password.message}

@@ -5,32 +5,17 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import {
   HiOutlineDocumentText,
-  HiOutlineExclamation,
   HiOutlineLocationMarker,
   HiOutlineBriefcase,
-  HiOutlineUserCircle,
-  HiOutlineCheckCircle,
   HiOutlineExclamationCircle,
-  HiOutlineClipboardCheck,
   HiOutlineLightBulb,
-  HiOutlineShieldCheck,
-  HiOutlineXCircle,
-  HiOutlineStar,
 } from "react-icons/hi";
 import {
   FaRegCheckCircle,
-  FaRegStar,
-  FaRegLightbulb,
-  FaRegFileAlt,
-  FaRegClipboard,
   FaExclamationTriangle,
-  FaRegCircle,
-  FaSyncAlt,
   FaRegQuestionCircle,
   FaSpinner,
 } from "react-icons/fa";
-import { MdOutlineInfo } from "react-icons/md";
-import { handleAnalyze } from "@/lib/jd";
 
 export default function AnalyzerPageUI() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -244,7 +229,8 @@ Output EXACTLY this JSON shape (fill fields realistically):
 
   useEffect(() => {
     try {
-      let authData = JSON.parse(localStorage.getItem("auth-data"));
+      const raw = localStorage.getItem("auth-data");
+      const authData = raw ? JSON.parse(raw) : null;
       if (authData?.isLogin) return;
       if (!authData?.isLogin) {
         router.push("/");
