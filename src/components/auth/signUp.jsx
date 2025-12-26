@@ -3,7 +3,7 @@
 import { colors } from "@/config/colors";
 import { useUser } from "@/stores/userStore";
 import { useRouter } from "next/navigation";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 
@@ -150,7 +150,9 @@ export default function SignUp() {
         <div className="flex flex-col gap-3">
           <button
             type="submit"
-            className="w-full p-3 rounded-md text-white font-medium"
+            className={`w-full p-3 rounded-md text-white font-medium ${
+              isAccountCreating && "animate-pulse"
+            }`}
             style={{ background: colors.deepTeal }}
           >
             {isAccountCreating ? "Creating your account…" : "Create Account"}

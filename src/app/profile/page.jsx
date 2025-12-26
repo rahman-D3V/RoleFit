@@ -89,7 +89,7 @@ export default function ProfileUI() {
 
       {/* Profile Data Popup Modal */}
       {showProfilePopup && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black bg-opacity-40 backdrop-blur-sm transition">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 bg-opacity-40 backdrop-blur-sm transition">
           <div
             className="relative bg-white rounded-2xl shadow-2xl border border-gray-200 p-0 w-full max-w-md mx-4"
             style={{
