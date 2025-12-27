@@ -3,14 +3,16 @@ import Navbar from "@/components/navbar";
 import { colors } from "@/config/colors";
 import { useUser } from "@/stores/userStore";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const MatchifyLanding = () => {
   const router = useRouter();
   const isUserLogin = useUser((s) => s.isUserLogin);
   const setIsUserLogin = useUser((s) => s.setIsUserLogin);
 
-  const [localAuthData,setLocalAuthData] = useState(null)
+  const [localAuthData, setLocalAuthData] = useState(null);
+
+  const videoRef = useRef();
 
   function handleLogout() {
     try {
@@ -40,7 +42,7 @@ const MatchifyLanding = () => {
       let authData = JSON.parse(localStorage.getItem("auth-data"));
       if (authData) {
         setIsUserLogin(authData?.isLogin);
-        setLocalAuthData(authData)
+        setLocalAuthData(authData);
       }
     } catch (error) {
       alert(error);
@@ -62,12 +64,17 @@ const MatchifyLanding = () => {
       >
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
           <div className="space-y-6">
-            {isUserLogin && <div
-              className="inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-2"
-              style={{ backgroundColor: colors.deepTeal, color: colors.white }}
-            >
-              {`Hey, ${localAuthData?.userName}`}
-            </div>}
+            {isUserLogin && (
+              <div
+                className="inline-block px-4 py-1.5 rounded-full text-xs font-medium mb-2"
+                style={{
+                  backgroundColor: colors.deepTeal,
+                  color: colors.white,
+                }}
+              >
+                {`Hey, ${localAuthData?.userName}`}
+              </div>
+            )}
             <h1
               className="text-5xl lg:text-6xl font-bold leading-tight tracking-tight"
               style={{ color: colors.carbonGray }}
@@ -228,63 +235,96 @@ const MatchifyLanding = () => {
 
           <div className="grid md:grid-cols-3 gap-6">
             <div
-              className="p-10 rounded-3xl transition-all hover:scale-105 hover:shadow-lg cursor-pointer border border-transparent hover:border-orange-200"
+              className="group relative overflow-hidden p-10 rounded-3xl transition-all hover:scale-105 hover:shadow-lg cursor-pointer border border-orange-300"
               style={{ backgroundColor: colors.peachCream }}
+              onMouseEnter={() => videoRef.current?.play()}
+              onMouseLeave={() => {
+                videoRef.current?.pause();
+                videoRef.current.currentTime = 0;
+              }}
             >
-              <div className="text-5xl mb-5">🎯</div>
-              <h3
-                className="text-2xl font-bold mb-3"
-                style={{ color: colors.carbonGray }}
-              >
-                Smart Matching
-              </h3>
-              <p
-                className="leading-relaxed"
-                style={{ color: colors.carbonGray, opacity: 0.7 }}
-              >
-                AI-powered analysis compares your profile with job requirements
-                to show you exactly where you stand.
-              </p>
+              {/* Video */}
+              <video
+                ref={videoRef}
+                src="/AI.mp4"
+                muted
+                playsInline
+                className="absolute inset-0 z-20 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              />
+
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+              {/* Content */}
+              <div className="relative z-10">
+                <div className="text-5xl mb-5">🎯</div>
+                <h3
+                  className="text-2xl font-bold mb-3"
+                  style={{ color: colors.carbonGray }}
+                >
+                  Smart Matching
+                </h3>
+                <p
+                  className="leading-relaxed"
+                  style={{ color: colors.carbonGray, opacity: 0.7 }}
+                >
+                  AI-powered analysis compares your profile with job
+                  requirements to show you exactly where you stand.
+                </p>
+              </div>
             </div>
 
             <div
-              className="p-10 rounded-3xl transition-all hover:scale-105 hover:shadow-lg cursor-pointer border border-transparent hover:border-teal-200"
+              className="group relative p-10 rounded-3xl overflow-hidden transition-all hover:scale-105 hover:shadow-lg cursor-pointer border border-teal-300"
               style={{ backgroundColor: colors.mintMist }}
             >
-              <div className="text-5xl mb-5">⚡</div>
-              <h3
-                className="text-2xl font-bold mb-3"
-                style={{ color: colors.carbonGray }}
-              >
-                Save Time
-              </h3>
-              <p
-                className="leading-relaxed"
-                style={{ color: colors.carbonGray, opacity: 0.7 }}
-              >
-                Focus only on jobs that match your skills and career goals. No
-                more wasted applications.
-              </p>
+              <img
+                src="/Time.gif"
+                alt=""
+                className="absolute inset-0 z-20 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              />
+
+              <div className="relative z-10">
+                <div className="text-5xl mb-5">⚡</div>
+                <h3
+                  className="text-2xl font-bold mb-3"
+                  style={{ color: colors.carbonGray }}
+                >
+                  Save Time
+                </h3>
+                <p
+                  className="leading-relaxed"
+                  style={{ color: colors.carbonGray, opacity: 0.7 }}
+                >
+                  Focus only on jobs that match your skills and career goals. No
+                  more wasted applications.
+                </p>
+              </div>
             </div>
 
-            <div
-              className="p-10 rounded-3xl transition-all hover:scale-105 hover:shadow-lg cursor-pointer border border-transparent hover:border-pink-200"
-              style={{ backgroundColor: colors.roseSoft }}
-            >
-              <div className="text-5xl mb-5">📊</div>
-              <h3
-                className="text-2xl font-bold mb-3"
-                style={{ color: colors.carbonGray }}
-              >
-                Deep Insights
-              </h3>
-              <p
-                className="leading-relaxed"
-                style={{ color: colors.carbonGray, opacity: 0.7 }}
-              >
-                Get detailed breakdowns on technical skills, soft skills, and
-                culture compatibility scores.
-              </p>
+            <div className="group relative p-10 rounded-3xl transition-all hover:scale-105 hover:shadow-lg overflow-hidden cursor-pointer border border-pink-300 bg-[#FFF4F4] hover:bg-white">
+              <img
+                src="/Insight.gif"
+                alt=""
+                className="absolute inset-0 z-20  w-[90%] h-[90%] mx-auto my-auto object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              />
+
+              <div className="relative z-10">
+                <div className="text-5xl mb-5">📊</div>
+                <h3
+                  className="text-2xl font-bold mb-3"
+                  style={{ color: colors.carbonGray }}
+                >
+                  Deep Insights
+                </h3>
+                <p
+                  className="leading-relaxed"
+                  style={{ color: colors.carbonGray, opacity: 0.7 }}
+                >
+                  Get detailed breakdowns on technical skills, soft skills, and
+                  culture compatibility scores.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -340,7 +380,7 @@ const MatchifyLanding = () => {
                 className="text-xl font-bold mb-3"
                 style={{ color: colors.carbonGray }}
               >
-                Paste Job Link
+                Paste Job Description
               </h3>
               <p
                 className="leading-relaxed"
@@ -377,7 +417,7 @@ const MatchifyLanding = () => {
       </section>
 
       {/* Trust Section */}
-      <section
+      {/* <section
         className="py-24 px-6"
         style={{ backgroundColor: colors.softIvory }}
       >
@@ -416,7 +456,7 @@ const MatchifyLanding = () => {
             </p>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Strip */}
       <section

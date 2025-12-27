@@ -6,7 +6,7 @@ import { useUser } from "@/stores/userStore";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import {HiOutlineUserCircle, HiOutlineX} from 'react-icons/hi'
+import { HiOutlineUserCircle, HiOutlineX } from "react-icons/hi";
 
 export default function ProfileUI() {
   const [userInfo, setUserInfo] = useState();
@@ -106,7 +106,6 @@ export default function ProfileUI() {
               tabIndex={0}
             >
               <HiOutlineX className="cursor-pointer" size={22} />
-
             </button>
             <div className="p-7 pt-8">
               <h3 className="mb-5 text-lg font-bold text-gray-800 tracking-tight">
@@ -211,7 +210,6 @@ export default function ProfileUI() {
 
             {/* Form */}
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-
               <div>
                 <label className="block text-sm font-medium mb-2">
                   Full name <span style={{ color: colors.deepTeal }}>*</span>
@@ -469,36 +467,6 @@ export default function ProfileUI() {
                     <span>⚠</span> {errors.currentCountry.message}
                   </p>
                 )}
-              </div>
-
-              {/* Timezone */}
-              <div>
-                <label className="block text-sm font-medium mb-2">
-                  Timezone
-                </label>
-                <input
-                  {...register("timeZone", {})}
-                  type="text"
-                  placeholder="e.g. Asia/Kolkata or GMT+5:30"
-                  className="w-full px-4 py-3 rounded-lg border transition-all focus:outline-none focus:ring-2 focus:border-transparent"
-                  style={{
-                    borderColor: errors.timeZone
-                      ? "#B04434"
-                      : "rgba(0,0,0,0.08)",
-                    backgroundColor: colors.softIvory,
-                  }}
-                />
-                {errors.timeZone && (
-                  <p
-                    className="text-xs mt-2 flex items-center gap-1"
-                    style={{ color: "#B04434" }}
-                  >
-                    <span>⚠</span> {errors.timeZone.message}
-                  </p>
-                )}
-                <p className="text-xs text-gray-500 mt-2">
-                  Optional but helps with remote jobs
-                </p>
               </div>
 
               {/* Willing to relocate */}
