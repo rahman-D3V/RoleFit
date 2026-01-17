@@ -39,73 +39,74 @@ const Navbar = () => {
       router.push("/");
     }, 1500);
 
-    
-      setIsUserLogin(authData.isLogin);
-   
+    setIsUserLogin(authData.isLogin);
   }
 
   // Navigation buttons reusable content
   const NavButtons = (
     <>
-      {pathname == "/" && (
+      {pathname === "/" && (
         <a href="#works">
           <button
-            className="w-full sm:w-auto px-6 py-2.5 cursor-pointer text-sm font-medium rounded-lg transition-all hover:bg-gray-200"
-            style={{ color: colors.carbonGray }}
             onClick={() => setIsMenuOpen(false)}
+            className="w-full sm:w-auto px-5 py-2.5 text-sm font-medium rounded-full
+          text-purple-200 hover:text-white
+          hover:bg-white/5 transition"
           >
             How it works
           </button>
         </a>
       )}
 
-      {authData?.isLogin && pathname == "/" && (
+      {authData?.isLogin && pathname === "/" && (
         <div className="flex flex-col sm:flex-row gap-2">
           <button
             onClick={() => {
               router.push("/profile");
               setIsMenuOpen(false);
             }}
-            className="w-full sm:w-auto px-6 py-2.5 cursor-pointer text-sm font-medium rounded-lg transition-all hover:bg-gray-200"
-            style={{ color: colors.carbonGray }}
+            className="w-full sm:w-auto px-5 py-2.5 text-sm font-medium rounded-full
+          text-purple-200 hover:text-white hover:bg-white/5 transition"
           >
             Profile
           </button>
+
           <button
             onClick={() => {
               router.push("/jd-analyzer");
               setIsMenuOpen(false);
             }}
-            className="w-full sm:w-auto px-6 py-2.5 cursor-pointer text-sm font-medium rounded-lg transition-all hover:bg-gray-200"
-            style={{ color: colors.carbonGray }}
+            className="w-full sm:w-auto px-5 py-2.5 text-sm font-medium rounded-full
+          text-purple-200 hover:text-white hover:bg-white/5 transition"
           >
-            JD-Analyzer
-          </button>
-        </div>
-      )}
-      {authData?.isLogin && pathname == "/profile" && (
-        <div className="flex flex-col sm:flex-row gap-2">
-          <button
-            onClick={() => {
-              router.push("/jd-analyzer");
-              setIsMenuOpen(false);
-            }}
-            className="w-full sm:w-auto px-6 py-2.5 cursor-pointer text-sm font-medium rounded-lg transition-all hover:bg-gray-200"
-            style={{ color: colors.carbonGray }}
-          >
-            JD-Analyzer
+            JD Analyzer
           </button>
         </div>
       )}
 
+      {authData?.isLogin && pathname === "/profile" && (
+        <button
+          onClick={() => {
+            router.push("/jd-analyzer");
+            setIsMenuOpen(false);
+          }}
+          className="w-full sm:w-auto px-5 py-2.5 text-sm font-medium rounded-full
+        text-purple-200 hover:text-white hover:bg-white/5 transition"
+        >
+          JD Analyzer
+        </button>
+      )}
+
       <button
-        className="w-full sm:w-auto px-6 py-2.5 cursor-pointer text-sm font-semibold text-white rounded-lg shadow-md transition-all hover:shadow-lg hover:-translate-y-0.5"
-        style={{ backgroundColor: colors.deepTeal }}
         onClick={() => {
-          if (authData?.isLogin) handleLogout();  
-          else router.push("/login");
+          authData?.isLogin ? handleLogout() : router.push("/login");
           setIsMenuOpen(false);
         }}
+        className="w-full sm:w-auto px-6 py-2.5 text-sm font-semibold rounded-full text-white
+      bg-gradient-to-r from-purple-500 to-indigo-500
+      shadow-[0_0_30px_rgba(168,85,247,0.45)]
+      hover:shadow-[0_0_45px_rgba(168,85,247,0.7)]
+      transition"
       >
         {authData?.isLogin ? "Logout" : "Login"}
       </button>
@@ -113,47 +114,62 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-        <div
-          onClick={() => router.push("/")}
-          className="flex items-center gap-2 cursor-pointer"
-        >
+    <nav className="sticky top-0 z-50">
+      {/* Glow line */}
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-purple-500/40 to-transparent" />
+
+      <div className="relative bg-[#090012]/95 backdrop-blur-xl border-b border-white/5">
+      
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+          {/* Logo */}
           <div
-            className="w-11 h-11 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-sm"
-            style={{ backgroundColor: colors.deepTeal }}
+            onClick={() => router.push("/")}
+            className="flex items-center gap-3 cursor-pointer"
           >
-            RF
+            <div
+              className="w-11 h-11 rounded-xl flex items-center justify-center text-white font-bold text-lg
+          bg-gradient-to-br from-purple-500 to-indigo-500
+          shadow-[0_0_25px_rgba(168,85,247,0.6)]"
+            >
+              RF
+            </div>
+
+            <span className="text-lg font-semibold tracking-tight text-white">
+              RoleFit
+            </span>
           </div>
-          <span
-            className="text-xl font-bold tracking-tight"
-            style={{ color: colors.carbonGray }}
+
+          {/* Mobile menu button */}
+          <button
+            className="sm:hidden text-2xl p-2 text-purple-300 hover:text-white transition"
+            aria-label="Open Menu"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            type="button"
           >
-            RoleFit
-          </span>
+            <HiMenu />
+          </button>
+
+          {/* Desktop menu */}
+          <div className="hidden sm:flex items-center gap-2">{NavButtons}</div>
         </div>
-
-        {/* Hamburger Menu for mobile */}
-        <button
-          className="sm:hidden flex items-center text-2xl p-2"
-          aria-label="Open Menu"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          type="button"
-        >
-          <HiMenu  className="text-black"/>
-        </button>
-
-        {/* Desktop Menu */}
-        <div className="hidden sm:flex gap-2">{NavButtons}</div>
       </div>
 
-      {/* Mobile Dropdown */}
+      {/* Mobile dropdown */}
       <div
-        className={`sm:hidden transition-all duration-200 ${
-          isMenuOpen ? "max-h-screen py-3 px-3" : "max-h-0 overflow-hidden py-0 px-0"
-        } bg-white/95 shadow`}
+        className={`sm:hidden transition-all duration-300 ${
+          isMenuOpen
+            ? "max-h-screen opacity-100"
+            : "max-h-0 opacity-0 overflow-hidden"
+        }`}
       >
-        <div className="flex flex-col gap-2">{NavButtons}</div>
+        <div
+          className="mx-4 mt-3 rounded-2xl p-4
+      bg-[#0b0018]/90 backdrop-blur-xl
+      border border-purple-500/20
+      shadow-[0_20px_60px_rgba(0,0,0,0.6)]"
+        >
+          <div className="flex flex-col gap-3">{NavButtons}</div>
+        </div>
       </div>
 
       {isLoggingOut && <LogoutToast />}
