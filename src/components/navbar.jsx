@@ -51,7 +51,7 @@ const Navbar = () => {
             onClick={() => setIsMenuOpen(false)}
             className="w-full sm:w-auto px-5 py-2.5 text-sm font-medium rounded-full
           text-purple-200 hover:text-white
-          hover:bg-white/5 transition"
+          hover:bg-white/5 transition cursor-pointer"
           >
             How it works
           </button>
@@ -66,7 +66,7 @@ const Navbar = () => {
               setIsMenuOpen(false);
             }}
             className="w-full sm:w-auto px-5 py-2.5 text-sm font-medium rounded-full
-          text-purple-200 hover:text-white hover:bg-white/5 transition"
+          text-purple-200 hover:text-white hover:bg-white/5 transition cursor-pointer"
           >
             Profile
           </button>
@@ -77,7 +77,7 @@ const Navbar = () => {
               setIsMenuOpen(false);
             }}
             className="w-full sm:w-auto px-5 py-2.5 text-sm font-medium rounded-full
-          text-purple-200 hover:text-white hover:bg-white/5 transition"
+          text-purple-200 hover:text-white hover:bg-white/5 transition cursor-pointer"
           >
             JD Analyzer
           </button>
@@ -104,9 +104,9 @@ const Navbar = () => {
         }}
         className="w-full sm:w-auto px-6 py-2.5 text-sm font-semibold rounded-full text-white
       bg-gradient-to-r from-purple-500 to-indigo-500
-      shadow-[0_0_30px_rgba(168,85,247,0.45)]
-      hover:shadow-[0_0_45px_rgba(168,85,247,0.7)]
-      transition"
+      
+      hover:shadow-[0_0_30px_rgba(168,85,247,0.45)]
+      transition cursor-pointer"
       >
         {authData?.isLogin ? "Logout" : "Login"}
       </button>
@@ -119,17 +119,16 @@ const Navbar = () => {
       <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-purple-500/40 to-transparent" />
 
       <div className="relative bg-[#090012]/95 backdrop-blur-xl border-b border-white/5">
-      
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           {/* Logo */}
           <div
             onClick={() => router.push("/")}
-            className="flex items-center gap-3 cursor-pointer"
+            className="flex items-center group gap-3 cursor-pointer"
           >
             <div
               className="w-11 h-11 rounded-xl flex items-center justify-center text-white font-bold text-lg
           bg-gradient-to-br from-purple-500 to-indigo-500
-          shadow-[0_0_25px_rgba(168,85,247,0.6)]"
+          group-hover:shadow-[0_0_25px_rgba(168,85,247,0.6)]"
             >
               RF
             </div>

@@ -89,69 +89,94 @@ export default function ProfileUI() {
 
       {/* Profile Data Popup Modal */}
       {showProfilePopup && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 bg-opacity-40 backdrop-blur-sm transition">
+        <div
+          className={`fixed inset-0 z-[60] flex items-center justify-center
+      bg-black/70 backdrop-blur-sm transition`}
+        >
           <div
-            className="relative bg-white rounded-2xl shadow-2xl border border-gray-200 p-0 w-full max-w-md mx-4"
-            style={{
-              background: "white",
-              border: "1px solid rgba(0,0,0,0.02)",
-            }}
+            className={`relative w-full max-w-md mx-4 rounded-2xl
+        border border-white/10 bg-[#0b0614]
+        shadow-2xl`}
           >
             {/* Close Button */}
             <button
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition rounded-full p-1 bg-gray-50 shadow-md"
+              className={`absolute top-4 right-4 rounded-full p-1
+          text-purple-300/70 hover:text-purple-200
+          bg-white/5 hover:bg-white/10
+          transition`}
               style={{ outline: "none", border: "none" }}
               onClick={handleClosePopup}
               aria-label="Close profile summary"
               tabIndex={0}
             >
-              <HiOutlineX className="cursor-pointer" size={22} />
+              <HiOutlineX className={`cursor-pointer`} size={22} />
             </button>
-            <div className="p-7 pt-8">
-              <h3 className="mb-5 text-lg font-bold text-gray-800 tracking-tight">
+
+            <div className={`p-7 pt-8`}>
+              <h3
+                className={`mb-5 text-lg font-semibold tracking-tight
+            text-purple-100`}
+              >
                 Profile Summary
               </h3>
+
               {userProfileData ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-700">
+                <div
+                  className={`grid grid-cols-1 sm:grid-cols-2 gap-4
+              text-sm text-purple-100`}
+                >
                   <div>
-                    <p className="text-gray-500 text-xs mb-1">Name</p>
-                    <p className="font-medium">{userProfileData?.fullName}</p>
+                    <p className={`text-xs mb-1 text-purple-300/60`}>Name</p>
+                    <p className={`font-medium`}>{userProfileData?.fullName}</p>
                   </div>
+
                   <div>
-                    <p className="text-gray-500 text-xs mb-1">Experience</p>
-                    <p className="font-medium">{userProfileData?.exp}</p>
+                    <p className={`text-xs mb-1 text-purple-300/60`}>
+                      Experience
+                    </p>
+                    <p className={`font-medium`}>{userProfileData?.exp}</p>
                   </div>
-                  <div className="sm:col-span-2">
-                    <p className="text-gray-500 text-xs mb-1">Skills</p>
-                    <p className="font-medium leading-relaxed">
+
+                  <div className={`sm:col-span-2`}>
+                    <p className={`text-xs mb-1 text-purple-300/60`}>Skills</p>
+                    <p className={`font-medium leading-relaxed`}>
                       {userProfileData?.skills}
                     </p>
                   </div>
+
                   <div>
-                    <p className="text-gray-500 text-xs mb-1">Qualification</p>
-                    <p className="font-medium">
+                    <p className={`text-xs mb-1 text-purple-300/60`}>
+                      Qualification
+                    </p>
+                    <p className={`font-medium`}>
                       {userProfileData?.qualification}
                     </p>
                   </div>
+
                   <div>
-                    <p className="text-gray-500 text-xs mb-1">
+                    <p className={`text-xs mb-1 text-purple-300/60`}>
                       Work Authorization
                     </p>
-                    <p className="font-medium">
+                    <p className={`font-medium`}>
                       {userProfileData?.userWorkAuthorization}
                     </p>
                   </div>
+
                   <div>
-                    <p className="text-gray-500 text-xs mb-1">
+                    <p className={`text-xs mb-1 text-purple-300/60`}>
                       Current Country
                     </p>
-                    <p className="font-medium">
+                    <p className={`font-medium`}>
                       {userProfileData?.currentCountry}
                     </p>
                   </div>
                 </div>
               ) : (
-                <div className="rounded-xl border border-dashed border-gray-300 bg-gray-50 p-6 text-center text-sm text-gray-500">
+                <div
+                  className={`rounded-xl border border-dashed border-white/10
+              bg-white/5 p-6 text-center text-sm
+              text-purple-300/70`}
+                >
                   No user data available
                 </div>
               )}
@@ -161,33 +186,43 @@ export default function ProfileUI() {
       )}
 
       <div
-        className="min-h-screen py-12 px-6"
-        style={{ background: colors.softIvory, color: colors.carbonGray }}
+        className={`min-h-screen py-12 px-6`}
+        style={{
+          background:
+            "radial-gradient(ellipse at center, rgba(46,12,47,0.85) 0%, rgba(8,4,12,0.9) 40%, rgba(0,0,0,1) 100%)",
+          color: "#EDE7FF",
+        }}
       >
-        <div className="relative max-w-2xl mx-auto">
+        <div className={`relative max-w-2xl mx-auto`}>
           <div
-            className="rounded-2xl p-8 shadow-lg"
+            className={`rounded-2xl p-8 shadow-lg `}
             style={{
-              background: "white",
-              border: "1px solid rgba(0,0,0,0.02)",
+              background:
+                "linear-gradient(180deg, rgba(8,6,14,0.7), rgba(6,4,12,0.85))",
+              border: "1px solid rgba(255,255,255,0.03)",
             }}
           >
             {/* Header */}
-            <div className="flex items-start gap-4 mb-8 pb-6 border-b border-gray-100">
-              <div
-                style={{
-                  width: 60,
-                  height: 60,
-                  borderRadius: 16,
-                  background: colors.deepTeal,
-                }}
-                className="flex items-center justify-center text-white font-bold text-2xl shadow-md"
-              >
-                RF
-              </div>
-              <div className="flex-1">
-                <h1 className="text-2xl font-bold mb-1">Build your profile</h1>
-                <p className="text-sm text-gray-500">
+            <div
+              className={`flex items-start gap-4 mb-8 pb-6 border-b`}
+              style={{ borderColor: "rgba(255,255,255,0.04)" }}
+            >
+              {/* <div
+          style={{
+            width: 60,
+            height: 60,
+            borderRadius: 16,
+            background: colors.deepTeal,
+          }}
+          className={`flex items-center justify-center text-white font-bold text-2xl shadow-md`}
+        >
+          RF
+        </div> */}
+              <div className={`flex-1`}>
+                <h1 className={`text-2xl font-bold mb-1`}>
+                  Build your profile
+                </h1>
+                <p className={`text-sm text-gray-400`}>
                   Help us match you with the right opportunities
                 </p>
               </div>
@@ -195,23 +230,25 @@ export default function ProfileUI() {
 
             <button
               onClick={handleGetProfileData}
-              className="flex items-center gap-2 px-4 py-2 mb-6 rounded-lg font-semibold bg-white border border-gray-200 shadow transition hover:bg-gray-100 hover:shadow-md text-gray-800"
+              className={`flex cursor-pointer items-center gap-2 px-4 py-2 mb-6 rounded-lg
+    font-semibold border transition-all
+    bg-white/5 text-purple-200
+    hover:bg-purple-500/10 hover:border-purple-400/40`}
               style={{
-                boxShadow: "0 2px 12px 0 rgba(0,0,0,0.03)",
+                borderColor: "rgba(255,255,255,0.08)",
                 outline: "none",
-                borderColor: colors.deepTeal,
               }}
             >
-              <span className="text-teal-600">
+              <span className={`text-purple-300`}>
                 <HiOutlineUserCircle size={20} />
               </span>
               See your profile summary
             </button>
 
             {/* Form */}
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={handleSubmit(onSubmit)} className={`space-y-6`}>
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label className={`block text-sm font-medium mb-2`}>
                   Full name <span style={{ color: colors.deepTeal }}>*</span>
                 </label>
                 <input
@@ -223,25 +260,26 @@ export default function ProfileUI() {
                     },
                   })}
                   type="text"
-                  placeholder="e.g. Yasir Khan"
-                  className="w-full px-4 py-3 rounded-lg border transition-all focus:outline-none focus:ring-2 focus:border-transparent"
+                  placeholder="e.g. Tony Stark"
+                  className={`w-full px-4 py-3 rounded-lg border transition-all focus:outline-none focus:ring-2 focus:border-transparent`}
                   style={{
                     borderColor: errors.fullName
                       ? "#B04434"
-                      : "rgba(0,0,0,0.08)",
-                    backgroundColor: colors.softIvory,
+                      : "rgba(255,255,255,0.06)",
+                    backgroundColor: "rgba(255,255,255,0.02)",
+                    color: "#E6E6F0",
                   }}
                   onFocus={(e) => {
                     e.target.style.ringColor = colors.deepTeal;
-                    e.target.style.backgroundColor = "white";
+                    e.target.style.backgroundColor = "rgba(255,255,255,0.03)";
                   }}
                   onBlur={(e) => {
-                    e.target.style.backgroundColor = colors.softIvory;
+                    e.target.style.backgroundColor = "rgba(255,255,255,0.02)";
                   }}
                 />
                 {errors.fullName && (
                   <p
-                    className="text-xs mt-2 flex items-center gap-1"
+                    className={`text-xs mt-2 flex items-center gap-1`}
                     style={{ color: "#B04434" }}
                   >
                     <span>⚠</span> {errors.fullName.message}
@@ -251,43 +289,40 @@ export default function ProfileUI() {
 
               {/* Tech stack */}
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label className={`block text-sm font-medium mb-2`}>
                   Top tech stack{" "}
                   <span style={{ color: colors.deepTeal }}>*</span>
                 </label>
                 <div
-                  className="mb-3 flex gap-2 items-center flex-wrap p-4 rounded-lg"
-                  style={{ background: colors.softIvory }}
+                  className={`mb-3 flex flex-wrap items-center gap-2 rounded-lg
+    border border-white/10 bg-white/5 px-4 py-3`}
                 >
-                  <span className="text-xs text-gray-500">Examples:</span>
-                  <div
-                    className="px-3 py-1.5 rounded-full text-xs font-medium"
-                    style={{
-                      background: colors.mintMist,
-                      color: colors.deepTeal,
-                    }}
+                  <span className={`text-xs text-purple-300/70`}>
+                    Examples:
+                  </span>
+
+                  <span
+                    className={`rounded-full bg-emerald-400/15 px-3 py-1.5
+      text-xs font-medium text-emerald-300`}
                   >
                     React
-                  </div>
-                  <div
-                    className="px-3 py-1.5 rounded-full text-xs font-medium"
-                    style={{
-                      background: colors.peachCream,
-                      color: colors.deepTeal,
-                    }}
+                  </span>
+
+                  <span
+                    className={`rounded-full bg-orange-400/15 px-3 py-1.5
+      text-xs font-medium text-orange-300`}
                   >
                     Next.js
-                  </div>
-                  <div
-                    className="px-3 py-1.5 rounded-full text-xs font-medium"
-                    style={{
-                      background: colors.roseSoft,
-                      color: colors.deepTeal,
-                    }}
+                  </span>
+
+                  <span
+                    className={`rounded-full bg-pink-400/15 px-3 py-1.5
+      text-xs font-medium text-pink-300`}
                   >
                     TypeScript
-                  </div>
+                  </span>
                 </div>
+
                 <input
                   {...register("skills", {
                     required: "Please add at least three skills",
@@ -296,29 +331,32 @@ export default function ProfileUI() {
                       message: "Skills must be at least 8 characters",
                     },
                   })}
-                  className="w-full px-4 py-3 rounded-lg border transition-all focus:outline-none focus:ring-2 focus:border-transparent"
+                  className={`w-full px-4 py-3 rounded-lg border transition-all focus:outline-none focus:ring-2 focus:border-transparent`}
                   style={{
-                    borderColor: errors.skills ? "#B04434" : "rgba(0,0,0,0.08)",
-                    backgroundColor: colors.softIvory,
+                    borderColor: errors.skills
+                      ? "#B04434"
+                      : "rgba(255,255,255,0.06)",
+                    backgroundColor: "rgba(255,255,255,0.02)",
+                    color: "#E6E6F0",
                   }}
                   placeholder="e.g. React, Node.js, TypeScript, MongoDB"
                 />
                 {errors.skills && (
                   <p
-                    className="text-xs mt-2 flex items-center gap-1"
+                    className={`text-xs mt-2 flex items-center gap-1`}
                     style={{ color: "#B04434" }}
                   >
                     <span>⚠</span> {errors.skills.message}
                   </p>
                 )}
-                <p className="text-xs text-gray-500 mt-2">
+                <p className={`text-xs text-gray-400 mt-2`}>
                   💡 Separate skills with commas for better matching
                 </p>
               </div>
 
               {/* Years of experience */}
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label className={`block text-sm font-medium mb-2`}>
                   Years of experience{" "}
                   <span style={{ color: colors.deepTeal }}>*</span>
                 </label>
@@ -326,16 +364,10 @@ export default function ProfileUI() {
                   {...register("exp", {
                     required: "Please select your experience range",
                   })}
-                  className="w-full px-4 py-3 rounded-lg border transition-all focus:outline-none focus:ring-2 focus:border-transparent appearance-none cursor-pointer"
-                  style={{
-                    borderColor: errors.exp ? "#B04434" : "rgba(0,0,0,0.08)",
-                    backgroundColor: colors.softIvory,
-                    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-                    backgroundPosition: "right 0.5rem center",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "1.5em 1.5em",
-                    paddingRight: "2.5rem",
-                  }}
+                  className={`w-full px-4 py-3 rounded-lg border appearance-none cursor-pointer
+    bg-white/5 text-purple-100
+    focus:outline-none focus:ring-2 focus:ring-purple-500
+    ${errors.exp ? "border-red-500" : "border-white/10 hover:border-white/20"}`}
                 >
                   <option value="">Select experience level</option>
                   <option value="0-1 years">0-1 years (Entry level)</option>
@@ -344,9 +376,10 @@ export default function ProfileUI() {
                   <option value="3-4 years">3-4 years</option>
                   <option value="5+ years">5+ years (Senior)</option>
                 </select>
+
                 {errors.exp && (
                   <p
-                    className="text-xs mt-2 flex items-center gap-1"
+                    className={`text-xs mt-2 flex items-center gap-1`}
                     style={{ color: "#B04434" }}
                   >
                     <span>⚠</span> {errors.exp.message}
@@ -355,7 +388,7 @@ export default function ProfileUI() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label className={`block text-sm font-medium mb-2`}>
                   Highest Qualification{" "}
                   <span style={{ color: colors.deepTeal }}>*</span>
                 </label>
@@ -370,25 +403,26 @@ export default function ProfileUI() {
                   })}
                   type="text"
                   placeholder="e.g. Bachelor's in Computer Science"
-                  className="w-full px-4 py-3 rounded-lg border transition-all focus:outline-none focus:ring-2 focus:border-transparent"
+                  className={`w-full px-4 py-3 rounded-lg border transition-all focus:outline-none focus:ring-2 focus:border-transparent`}
                   style={{
                     borderColor: errors.qualification
                       ? "#B04434"
-                      : "rgba(0,0,0,0.08)",
-                    backgroundColor: colors.softIvory,
+                      : "rgba(255,255,255,0.06)",
+                    backgroundColor: "rgba(255,255,255,0.02)",
+                    color: "#E6E6F0",
                   }}
                   onFocus={(e) => {
                     e.target.style.ringColor = colors.deepTeal;
-                    e.target.style.backgroundColor = "white";
+                    e.target.style.backgroundColor = "rgba(255,255,255,0.03)";
                   }}
                   onBlur={(e) => {
-                    e.target.style.backgroundColor = colors.softIvory;
+                    e.target.style.backgroundColor = "rgba(255,255,255,0.02)";
                   }}
                 />
 
                 {errors.qualification && (
                   <p
-                    className="text-xs mt-2 flex items-center gap-1"
+                    className={`text-xs mt-2 flex items-center gap-1`}
                     style={{ color: "#B04434" }}
                   >
                     <span>⚠</span> {errors.qualification.message}
@@ -398,7 +432,7 @@ export default function ProfileUI() {
 
               {/* Work Authorization */}
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label className={`block text-sm font-medium mb-2`}>
                   Work authorization{" "}
                   <span style={{ color: colors.deepTeal }}>*</span>
                 </label>
@@ -406,18 +440,14 @@ export default function ProfileUI() {
                   {...register("userWorkAuthorization", {
                     required: "Please select your work authorization status",
                   })}
-                  className="w-full px-4 py-3 rounded-lg border transition-all focus:outline-none focus:ring-2 focus:border-transparent appearance-none cursor-pointer"
-                  style={{
-                    borderColor: errors.userWorkAuthorization
-                      ? "#B04434"
-                      : "rgba(0,0,0,0.08)",
-                    backgroundColor: colors.softIvory,
-                    backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
-                    backgroundPosition: "right 0.5rem center",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "1.5em 1.5em",
-                    paddingRight: "2.5rem",
-                  }}
+                  className={`w-full px-4 py-3 rounded-lg border appearance-none cursor-pointer
+    bg-white/5 text-purple-100
+    focus:outline-none focus:ring-2 focus:ring-purple-500
+    ${
+      errors.userWorkAuthorization
+        ? "border-red-500"
+        : "border-white/10 hover:border-white/20"
+    }`}
                 >
                   <option value="">Select authorization status</option>
                   <option value="country-only">
@@ -429,9 +459,10 @@ export default function ProfileUI() {
                   <option value="need-sponsorship">Need sponsorship</option>
                   <option value="not-sure">Not sure</option>
                 </select>
+
                 {errors.userWorkAuthorization && (
                   <p
-                    className="text-xs mt-2 flex items-center gap-1"
+                    className={`text-xs mt-2 flex items-center gap-1`}
                     style={{ color: "#B04434" }}
                   >
                     <span>⚠</span> {errors.userWorkAuthorization.message}
@@ -441,7 +472,7 @@ export default function ProfileUI() {
 
               {/* Current country */}
               <div>
-                <label className="block text-sm font-medium mb-2">
+                <label className={`block text-sm font-medium mb-2`}>
                   Current country{" "}
                   <span style={{ color: colors.deepTeal }}>*</span>
                 </label>
@@ -451,17 +482,18 @@ export default function ProfileUI() {
                   })}
                   type="text"
                   placeholder="e.g. India"
-                  className="w-full px-4 py-3 rounded-lg border transition-all focus:outline-none focus:ring-2 focus:border-transparent"
+                  className={`w-full px-4 py-3 rounded-lg border transition-all focus:outline-none focus:ring-2 focus:border-transparent`}
                   style={{
                     borderColor: errors.currentCountry
                       ? "#B04434"
-                      : "rgba(0,0,0,0.08)",
-                    backgroundColor: colors.softIvory,
+                      : "rgba(255,255,255,0.06)",
+                    backgroundColor: "rgba(255,255,255,0.02)",
+                    color: "#E6E6F0",
                   }}
                 />
                 {errors.currentCountry && (
                   <p
-                    className="text-xs mt-2 flex items-center gap-1"
+                    className={`text-xs mt-2 flex items-center gap-1`}
                     style={{ color: "#B04434" }}
                   >
                     <span>⚠</span> {errors.currentCountry.message}
@@ -471,37 +503,40 @@ export default function ProfileUI() {
 
               {/* Willing to relocate */}
               <div
-                className="flex items-start gap-3 p-4 rounded-lg border transition-all cursor-pointer hover:border-opacity-50"
+                className={`flex items-start gap-3 p-4 rounded-lg border transition-all cursor-pointer hover:border-opacity-50`}
                 style={{
-                  borderColor: "rgba(0,0,0,0.08)",
-                  background: colors.softIvory,
+                  borderColor: "rgba(255,255,255,0.06)",
+                  background: "rgba(255,255,255,0.02)",
                 }}
               >
                 <input
                   {...register("willingToRelocate")}
                   type="checkbox"
                   id="relocate"
-                  className="w-5 h-5 mt-0.5 rounded cursor-pointer"
+                  className={`w-5 h-5 mt-0.5 rounded cursor-pointer`}
                   style={{ accentColor: colors.deepTeal }}
                 />
                 <label
                   htmlFor="relocate"
-                  className="text-sm cursor-pointer flex-1"
+                  className={`text-sm cursor-pointer flex-1`}
                 >
-                  <span className="font-medium">Willing to relocate</span>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <span className={`font-medium`}>Willing to relocate</span>
+                  <p className={`text-xs text-gray-400 mt-1`}>
                     Check this if you're open to moving for the right
                     opportunity
                   </p>
                 </label>
               </div>
 
-              <div className="pt-4">
+              <div className={`pt-4`}>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 rounded-xl text-white font-semibold shadow-lg transition-all"
-                  style={{ background: colors.deepTeal }}
+                  className={`w-full py-4 rounded-xl text-white font-semibold shadow-lg transition-all`}
+                  style={{
+                    background: "linear-gradient(90deg,#ec4899,#8b5cf6)",
+                    boxShadow: "0 12px 40px rgba(139,92,246,0.22)",
+                  }}
                 >
                   {isSubmitting ? "Submitting..." : "Save profile →"}
                 </button>
@@ -509,11 +544,14 @@ export default function ProfileUI() {
             </form>
 
             <div
-              className="mt-6 p-4 rounded-lg flex items-start gap-3"
-              style={{ background: colors.mintMist }}
+              className={`mt-6 p-4 rounded-lg flex items-start gap-3`}
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(12,6,18,0.6), rgba(6,4,12,0.5))",
+              }}
             >
-              <span className="text-lg">💡</span>
-              <p className="text-xs text-gray-600 leading-relaxed">
+              <span className={`text-lg`}>💡</span>
+              <p className={`text-xs text-gray-400 leading-relaxed`}>
                 Your profile helps us analyze job matches better. You can update
                 these details anytime before analyzing a job description.
               </p>

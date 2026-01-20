@@ -53,10 +53,7 @@ const MatchifyLanding = () => {
   }, []);
 
   return (
-    <div
-      className="min-h-screen  font-sans antialiased"
-      style={{ backgroundColor: colors.softIvory }}
-    >
+    <div className="min-h-screen  font-sans antialiased">
       {/* Navigation */}
       <Navbar />
 
@@ -75,12 +72,19 @@ const MatchifyLanding = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[720px] h-[720px] rounded-full border border-purple-400/10" />
 
         <div className="relative z-10 text-center max-w-4xl">
-          {isUserLogin && (
+          {isUserLogin ? (
             <div
               className="inline-flex mb-6 px-4 py-1.5 rounded-full text-xs font-medium
         bg-purple-500/10 text-purple-300 border border-purple-500/20"
             >
               Welcome back, {localAuthData?.userName}
+            </div>
+          ) : (
+            <div
+              className="inline-flex mb-6 px-4 py-1.5 rounded-full text-xs font-medium
+        bg-purple-500/10 text-purple-300 border border-purple-500/20"
+            >
+              Welcome to RoleFit
             </div>
           )}
 
@@ -111,172 +115,23 @@ const MatchifyLanding = () => {
         </div>
 
         {/* Floating card */}
-        <div className="absolute bottom-[-120px] w-full flex justify-center z-20">
-          <div
-            className="w-[360px] rounded-3xl p-6
-      bg-gradient-to-b from-white/10 to-white/5
-      backdrop-blur-xl border border-purple-500/20
-      shadow-[0_20px_80px_rgba(0,0,0,0.6)]"
-          >
-            <div className="flex justify-between mb-4 text-sm text-purple-200">
-              <span>Match Score</span>
-              <span className="text-white font-semibold">87%</span>
-            </div>
-
-            <div className="h-2 rounded-full bg-white/10 overflow-hidden">
-              <div className="h-2 w-[87%] bg-gradient-to-r from-purple-400 to-indigo-400" />
-            </div>
-
-            <div className="mt-5 text-center text-xs text-purple-300 bg-purple-500/10 py-2 rounded-lg border border-purple-500/20">
-              Strong Match • High Confidence
-            </div>
-          </div>
-        </div>
       </BackgroundLines>
 
-      <div className=" py-4 relative  py-28 px-6 overflow-hidden bg-[#07000f]">
-        <h2 className="text-4xl text-center lg:text-5xl font-semibold text-white mb-4">
-              Why{" "}
-              <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
-                RoleFit
-              </span>{" "}
-              works
-            </h2>
+      <div className=" py-4 relative sm:-mt-20    py-28 px-6 overflow-hidden bg-[#07000f]">
+        <h2 className="text-4xl text-center lg:text-5xl font-semibold text-white md:mb-10 mb-4">
+          Why{" "}
+          <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
+            RoleFit
+          </span>{" "}
+          works
+        </h2>
         <StickyScroll content={content} />
       </div>
-
-      {/* Features Section */}
-      <section className="relative block md:hidden py-28 px-6 overflow-hidden bg-[#07000f]">
-        {/* Ambient glow */}
-        <div className="absolute inset-0 -z-10">
-          <div
-            className="absolute left-1/2 top-1/2 h-[900px] w-[900px]
-      -translate-x-1/2 -translate-y-1/2 rounded-full
-      bg-[radial-gradient(circle_at_center,rgba(168,85,247,0.18),transparent_65%)]
-      blur-3xl"
-          />
-        </div>
-
-        <div className="max-w-7xl mx-auto">
-          {/* Heading */}
-          <div className="text-center mb-20">
-            <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-4">
-              Why{" "}
-              <span className="bg-gradient-to-r from-purple-400 to-indigo-400 bg-clip-text text-transparent">
-                RoleFit
-              </span>{" "}
-              works
-            </h2>
-
-            <p className="text-lg max-w-2xl mx-auto text-purple-200/70">
-              Stop applying blindly. Start applying strategically.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* CARD 1 */}
-            <div
-              className="group relative overflow-hidden p-10 rounded-3xl
-        bg-gradient-to-b from-white/10 to-white/5
-        backdrop-blur-xl border border-purple-500/20
-        shadow-[0_20px_60px_rgba(0,0,0,0.6)]
-        transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_30px_80px_rgba(168,85,247,0.35)]
-        cursor-pointer"
-              onMouseEnter={() => videoRef.current?.play()}
-              onMouseLeave={() => {
-                videoRef.current?.pause();
-                videoRef.current.currentTime = 0;
-              }}
-            >
-              {/* Video (unchanged logic) */}
-              <video
-                ref={videoRef}
-                src="/AI.mp4"
-                muted
-                playsInline
-                className="absolute inset-0 z-20 w-full h-full object-cover
-          opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              />
-
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-              {/* Content */}
-              <div className="relative z-10">
-                <div className="text-5xl mb-5">🎯</div>
-                <h3 className="text-2xl font-semibold text-white mb-3">
-                  Smart Matching
-                </h3>
-                <p className="leading-relaxed text-purple-200/70">
-                  AI-powered analysis compares your profile with job
-                  requirements to show you exactly where you stand.
-                </p>
-              </div>
-            </div>
-
-            {/* CARD 2 */}
-            <div
-              className="group relative p-10 rounded-3xl overflow-hidden
-        bg-gradient-to-b from-white/10 to-white/5
-        backdrop-blur-xl border border-purple-500/20
-        shadow-[0_20px_60px_rgba(0,0,0,0.6)]
-        transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_30px_80px_rgba(168,85,247,0.35)]
-        cursor-pointer"
-            >
-              <img
-                src="/Time.gif"
-                alt=""
-                className="absolute inset-0 z-20 w-full h-full object-cover
-          opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              />
-
-              <div className="relative z-10">
-                <div className="text-5xl mb-5">⚡</div>
-                <h3 className="text-2xl font-semibold text-white mb-3">
-                  Save Time
-                </h3>
-                <p className="leading-relaxed text-purple-200/70">
-                  Focus only on jobs that match your skills and career goals. No
-                  more wasted applications.
-                </p>
-              </div>
-            </div>
-
-            {/* CARD 3 */}
-            <div
-              className="group relative p-10 rounded-3xl overflow-hidden
-        bg-gradient-to-b from-white/10 to-white/5
-        backdrop-blur-xl border border-purple-500/20
-        shadow-[0_20px_60px_rgba(0,0,0,0.6)]
-        transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_30px_80px_rgba(168,85,247,0.35)]
-        cursor-pointer"
-            >
-              <img
-                src="/Insight.gif"
-                alt=""
-                className="absolute inset-0 z-20 w-[90%] h-[90%] mx-auto my-auto object-cover
-          opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              />
-
-              <div className="relative z-10">
-                <div className="text-5xl mb-5">📊</div>
-                <h3 className="text-2xl font-semibold text-white mb-3">
-                  Deep Insights
-                </h3>
-                <p className="leading-relaxed text-purple-200/70">
-                  Get detailed breakdowns on technical skills, soft skills, and
-                  culture compatibility scores.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* How It Works */}
       <section
         id="works"
-        className="relative py-28 px-6 overflow-hidden bg-[#07000f]"
+        className="relative py-28 px-6 overflow-hidden cursor-pointer bg-[#07000f]"
       >
         {/* Ambient glow */}
         <div className="absolute inset-0 -z-10">
@@ -289,7 +144,7 @@ const MatchifyLanding = () => {
 
         <section
           id="works"
-          className="relative py-28 px-6 overflow-hidden block md:hidden bg-[#07000f]"
+          className="relative py-28 -mt-57 px-6 overflow-hidden block md:hidden bg-[#07000f]"
         >
           {" "}
           {/* Ambient glow */}{" "}
@@ -396,8 +251,8 @@ const MatchifyLanding = () => {
                 title: "Get Match Report",
                 desc: "Receive instant analysis with match scores, skill gaps, and application tips.",
               },
-            ].map((item) => (
-              <div className="border   border-black/[0.2] dark:border-white/[0.2] flex flex-col items-start max-w-sm mx-auto p-4 relative">
+            ].map((item,index) => (
+              <div key={index} className="border border-black/[0.2] dark:border-white/[0.2] flex flex-col items-start max-w-sm mx-auto p-4 relative">
                 <Icon className="absolute h-6 w-6 -top-3 -left-3 dark:text-white text-black" />
                 <Icon className="absolute h-6 w-6 -bottom-3 -left-3 dark:text-white text-black" />
                 <Icon className="absolute h-6 w-6 -top-3 -right-3 dark:text-white text-black" />
@@ -418,7 +273,7 @@ const MatchifyLanding = () => {
       </section>
 
       {/* CTA Strip */}
-      <section className="relative overflow-hidden bg-[#07000f] py-28 px-6">
+      <section className="relative md:-mt-0 -mt-40 overflow-hidden bg-[#07000f] py-28 px-6">
         {/* Ambient glow */}
         <div className="absolute inset-0 -z-10">
           <div
@@ -461,7 +316,7 @@ const MatchifyLanding = () => {
       </section>
 
       {/* Footer */}
-      <footer className="relative bg-[#05000c] py-10 px-6 border-t border-white/5">
+      <footer className="relative md:-mt-0 -mt-15 bg-[#05000c] py-10 px-6 border-t border-white/5">
         {/* subtle top glow line */}
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent" />
 
@@ -506,7 +361,6 @@ const content = [
           alt="linear board demo"
         />
       </div>
-      
     ),
   },
   {
@@ -516,7 +370,7 @@ const content = [
     content: (
       <div className="flex h-full w-full items-center justify-center text-white">
         <img
-          src="https://miro.medium.com/0*Yb_BsikIKFAtuKj9.gif"
+          src="https://cdn.dribbble.com/userupload/21210735/file/original-f7ebdf65860bfbfd73e5355d596ccf06.gif"
           width={300}
           height={300}
           className="h-full w-full object-cover"
@@ -526,9 +380,9 @@ const content = [
     ),
   },
   {
-    title: "Running out of content",
+    title: "🚀 Apply with Confidence",
     description:
-      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+      "Make informed decisions backed by data. Apply only when you know you’re a strong match, not just hoping you are.",
     content: (
       <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
         Running out of content
