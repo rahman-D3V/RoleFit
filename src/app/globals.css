@@ -36,15 +36,15 @@ body {
 }
 
 select option {
-  background-color: #0b0614;
-  color: #e9d5ff;
+  background-color: #0b0614 !important;
+  color: #e9d5ff !important;
 }
 
 select option:checked {
-  background-color: #7c3aed;
-  color: white;
+  background-color: #7c3aed !important;
+  color: white !important;
 }
 
 select option:hover {
-  background-color: #6d28d9;
+  background-color: #6d28d9 !important;
 }

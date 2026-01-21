@@ -77,11 +77,22 @@ export default function ProfileUI() {
 
       {/* Top redirect loader */}
       {redirectToAnalyzerPage && (
-        <div className="fixed top-0 left-0 w-full z-50">
-          <div className="h-1 bg-gray-200 overflow-hidden">
-            <div className="h-full bg-teal-600 animate-[loading_2s_linear]" />
+        <div className={`fixed top-0 left-0 w-full z-50`}>
+          {/* Progress bar */}
+          <div className={`h-1 bg-white/10 overflow-hidden`}>
+            <div className={`h-full bg-gradient-to-r from-purple-500 to-indigo-500 animate-[loading_2s_linear]`} />
           </div>
-          <div className="text-center text-sm py-2 bg-white shadow">
+
+          {/* Status text */}
+          <div
+            className={`
+        text-center text-sm py-2
+        bg-[#07000f]/95 backdrop-blur-md
+        text-purple-200
+        border-b border-white/10
+        shadow-[0_8px_30px_rgba(0,0,0,0.6)]
+      `}
+          >
             Redirecting to JD Analyzer…
           </div>
         </div>
@@ -532,7 +543,7 @@ export default function ProfileUI() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full py-4 rounded-xl text-white font-semibold shadow-lg transition-all`}
+                  className={`w-full py-4 cursor-pointer rounded-xl text-white font-semibold shadow-lg transition-all`}
                   style={{
                     background: "linear-gradient(90deg,#ec4899,#8b5cf6)",
                     boxShadow: "0 12px 40px rgba(139,92,246,0.22)",
