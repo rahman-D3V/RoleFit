@@ -24,3 +24,27 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+.no-scrollbar {
+  scrollbar-width: none !important; /* Firefox */
+  -ms-overflow-style: none !important; /* IE and Edge */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important; /* Chrome, Safari */
+}
+
+select option {
+  background-color: #0b0614 !important;
+  color: #e9d5ff !important;
+}
+
+select option:checked {
+  background-color: #7c3aed !important;
+  color: white !important;
+}
+
+select option:hover {
+  background-color: #6d28d9 !important;
+}

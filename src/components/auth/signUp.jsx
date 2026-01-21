@@ -52,54 +52,55 @@ export default function SignUp() {
 
   return (
     <div
-      className="rounded-xl p-6 shadow-md"
-      style={{
-        background: "white",
-        border: "1px solid rgba(0,0,0,0.04)",
-      }}
+      className="relative rounded-2xl p-8
+  bg-gradient-to-b from-white/10 to-white/5
+  backdrop-blur-xl border border-purple-500/20
+  shadow-[0_20px_60px_rgba(0,0,0,0.6)]
+  text-white"
     >
       {/* Header */}
-      <div className="flex items-center gap-3 mb-4">
+      <div className="flex items-center gap-4 mb-6">
         <div
-          style={{
-            width: 48,
-            height: 48,
-            borderRadius: 10,
-            background: colors.deepTeal,
-          }}
-          className="flex items-center justify-center text-white font-semibold"
+          className="w-12 h-12 rounded-xl flex items-center justify-center
+      font-semibold text-white
+      bg-gradient-to-br from-purple-500 to-indigo-500
+      "
         >
           RF
         </div>
         <div>
           <div className="font-semibold text-lg">RoleFit</div>
-          <div className="text-xs text-gray-500">Create your account</div>
+          <div className="text-xs text-purple-200/60">Create your account</div>
         </div>
       </div>
 
       <h2 className="text-2xl font-semibold mb-2">Sign up</h2>
-      <p className="text-sm text-gray-600 mb-6">
+      <p className="text-sm text-purple-200/70 mb-6">
         Create a free RoleFit account to get started.
       </p>
 
       {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid gap-3 mb-3">
-          <label className="block text-sm">Username</label>
+        <div className="grid gap-3 mb-4">
+          {/* Username */}
+          <label className="block text-sm text-purple-200/80">Username</label>
           <input
             {...register("userName", { required: "username is required" })}
-            className="w-full p-3 rounded-md border"
-            style={{ borderColor: "rgba(0,0,0,0.06)" }}
+            className="w-full p-3 rounded-lg
+        bg-black/30 border border-white/10
+        text-white placeholder-purple-200/40
+        focus:outline-none focus:ring-2 focus:ring-purple-500/40"
             placeholder="Enter username"
             type="text"
           />
           {errors.userName && (
-            <p className="text-xs mt-1" style={{ color: "#B04434" }}>
+            <p className="text-xs mt-1 text-red-400">
               {errors.userName.message}
             </p>
           )}
 
-          <label className="block text-sm">Email</label>
+          {/* Email */}
+          <label className="block text-sm text-purple-200/80">Email</label>
           <input
             id="emailInput"
             {...register("email", {
@@ -109,29 +110,35 @@ export default function SignUp() {
                 message: "Invalid email address",
               },
             })}
-            className="w-full p-3 rounded-md border"
-            style={{ borderColor: "rgba(0,0,0,0.06)" }}
+            className="w-full p-3 rounded-lg
+        bg-black/30 border border-white/10
+        text-white placeholder-purple-200/40
+        focus:outline-none focus:ring-2 focus:ring-purple-500/40"
             placeholder="you@example.com"
             type="email"
           />
           {errors.email && (
-            <p className="text-xs mt-1" style={{ color: "#B04434" }}>
-              {errors.email.message}
-            </p>
+            <p className="text-xs mt-1 text-red-400">{errors.email.message}</p>
           )}
 
-          <label className="block text-sm">Password</label>
+          {/* Password */}
+          <label className="block text-sm text-purple-200/80">Password</label>
           <div className="relative">
             <input
               {...register("password", { required: "password is required" })}
-              className="w-full p-3 rounded-md border pr-10"
-              style={{ borderColor: "rgba(0,0,0,0.06)" }}
+              className="w-full p-3 rounded-lg pr-10
+          bg-black/30 border border-white/10
+          text-white placeholder-purple-200/40
+          focus:outline-none focus:ring-2 focus:ring-purple-500/40"
               placeholder="Create a password"
               type={showPassword ? "text" : "password"}
             />
+
             <div
               onClick={() => setShowPassword((prev) => !prev)}
-              className="absolute top-[22px] right-3 transform -translate-y-1/2 text-gray-400 cursor-pointer"
+              className="absolute top-1/2 right-3 -translate-y-1/2
+          text-purple-300 cursor-pointer
+          hover:text-white transition"
               tabIndex={0}
               role="button"
               aria-label={showPassword ? "Hide password" : "Show password"}
@@ -140,32 +147,34 @@ export default function SignUp() {
             </div>
           </div>
           {errors.password && (
-            <p className="text-xs mt-1" style={{ color: "#B04434" }}>
+            <p className="text-xs mt-1 text-red-400">
               {errors.password.message}
             </p>
           )}
         </div>
 
-        {/* Actions */}
-        <div className="flex flex-col gap-3">
-          <button
-            type="submit"
-            className={`w-full p-3 rounded-md text-white font-medium ${
-              isAccountCreating && "animate-pulse"
-            }`}
-            style={{ background: colors.deepTeal }}
-          >
-            {isAccountCreating ? "Creating your account…" : "Create Account"}
-          </button>
-        </div>
+        {/* Submit */}
+        <button
+          type="submit"
+          className={`w-full p-3 rounded-lg font-medium text-white
+      bg-gradient-to-r from-purple-500 to-indigo-500
+      
+      hover:shadow-[0_0_30px_rgba(168,85,247,0.5)]
+      transition ${isAccountCreating && "animate-pulse"}`}
+        >
+          {isAccountCreating ? "Creating your account…" : "Create Account"}
+        </button>
       </form>
 
-      <div className="text-xs text-gray-500 mt-4">
+      {/* Footer */}
+      <div className="text-xs text-purple-200/50 mt-5">
         This is a prototype. Nothing is stored on servers.
       </div>
 
       <button
-        className="px-3 py-1.5 mt-2 rounded-md cursor-pointer text-sm bg-teal-50 text-teal-700 hover:bg-teal-100"
+        className="mt-3 text-sm px-4 py-2 rounded-lg
+    bg-purple-500/10 text-purple-300
+    hover:bg-purple-500/20 transition"
         onClick={handleRef}
       >
         Use demo credentials

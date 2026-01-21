@@ -66,112 +66,144 @@ export default function Login() {
   }
 
   return (
-    <div className="rounded-xl p-6 shadow-md" style={{ background: "white" }}>
-      <div className="flex items-center gap-3 mb-4">
+    <div
+      className="relative rounded-2xl p-8
+  bg-gradient-to-b from-white/10 to-white/5
+  backdrop-blur-xl border border-purple-500/20
+  shadow-[0_20px_60px_rgba(0,0,0,0.6)]
+  text-white"
+    >
+      {/* Header */}
+      <div className="flex items-center gap-4 mb-6">
         <div
-          style={{
-            width: 44,
-            height: 44,
-            borderRadius: 10,
-            background: colors.deepTeal,
-          }}
-          className="flex items-center justify-center text-white font-semibold"
+          className="w-11 h-11 rounded-xl flex items-center justify-center
+      font-semibold text-white
+      bg-gradient-to-br from-purple-500 to-indigo-500
+      "
         >
           RF
         </div>
         <div>
           <div className="font-semibold">RoleFit</div>
-          <div className="text-xs text-gray-600">Quick sign-in</div>
+          <div className="text-xs text-purple-200/60">Quick sign-in</div>
         </div>
       </div>
 
-      <h2 className="text-xl font-semibold mb-3">Welcome</h2>
-      <p className="text-sm text-gray-600 mb-6">
+      <h2 className="text-xl font-semibold mb-2">Welcome</h2>
+      <p className="text-sm text-purple-200/70 mb-6">
         Enter your username and password to sign in.
       </p>
 
+      {/* Errors */}
       {isCredentialsError && (
-        <div className="mb-6 px-4 py-2 rounded-md bg-red-50 border border-red-300">
-          <span className="text-sm text-red-700 font-medium">
+        <div
+          className="mb-6 px-4 py-2 rounded-lg
+      bg-red-500/10 border border-red-500/30"
+        >
+          <span className="text-sm text-red-400 font-medium">
             Invalid credentials
           </span>
         </div>
       )}
 
       {isAuthData && (
-        <div className="mb-6 px-4 py-2 rounded-md bg-red-50 border border-red-300">
-          <span className="text-sm text-red-700 font-medium">
+        <div
+          className="mb-6 px-4 py-2 rounded-lg
+      bg-red-500/10 border border-red-500/30"
+        >
+          <span className="text-sm text-red-400 font-medium">
             No account found. Please create an account.
           </span>
         </div>
       )}
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label className="block text-sm mb-2">Username</label>
+        {/* Username */}
+        <label className="block text-sm mb-2 text-purple-200/80">
+          Username
+        </label>
         <input
           {...register("userName", { required: "Username is required" })}
-          className="w-full p-3 rounded-md mb-2 border"
-          style={{ borderColor: "rgba(0,0,0,0.06)" }}
+          className="w-full p-3 rounded-lg mb-2
+      bg-black/30 border border-white/10
+      text-white placeholder-purple-200/40
+      focus:outline-none focus:ring-2 focus:ring-purple-500/40"
           placeholder="Enter username"
           type="text"
         />
         {errors.userName && (
-          <p className="text-xs mt-1 mb-2" style={{ color: "#B04434" }}>
+          <p className="text-xs mt-1 mb-2 text-red-400">
             {errors.userName.message}
           </p>
         )}
 
-        <label className="block text-sm mb-2">Password</label>
+        {/* Password */}
+        <label className="block text-sm mb-2 text-purple-200/80">
+          Password
+        </label>
         <div className="relative">
           <input
             {...register("password", { required: "Password is required" })}
-            className="w-full p-3 rounded-md mb-2 border pr-10"
-            style={{ borderColor: "rgba(0,0,0,0.06)" }}
+            className="w-full p-3 rounded-lg mb-2 pr-10
+        bg-black/30 border border-white/10
+        text-white placeholder-purple-200/40
+        focus:outline-none focus:ring-2 focus:ring-purple-500/40"
             placeholder="Enter password"
             type={showPassword ? "text" : "password"}
           />
+
           <div
             onClick={() => setShowPassword((prev) => !prev)}
-            className="absolute top-[25px] right-3 transform -translate-y-1/2 text-gray-400 cursor-pointer"
+            className="absolute top-1/2 right-3 -translate-y-1/2
+        text-purple-300 cursor-pointer hover:text-white transition"
             tabIndex={0}
             role="button"
             aria-label={showPassword ? "Hide password" : "Show password"}
           >
-            {showPassword ? <HiEye size={17} />  :  <HiEyeOff size={17} />}
+            {showPassword ? <HiEye size={17} /> : <HiEyeOff size={17} />}
           </div>
         </div>
+
         {errors.password && (
-          <p className="text-xs mt-1 mb-1" style={{ color: "#B04434" }}>
+          <p className="text-xs mt-1 mb-1 text-red-400">
             {errors.password.message}
           </p>
         )}
 
+        {/* Submit */}
         {isSigningIn ? (
           <button
             type="submit"
-            className="w-full animate-pulse p-3 rounded-md text-white font-medium mt-2"
-            style={{ background: colors.deepTeal }}
+            className="w-full p-3 mt-3 rounded-lg font-medium
+        bg-gradient-to-r from-purple-500 to-indigo-500
+        animate-pulse text-white"
           >
             signing in...
           </button>
         ) : (
           <button
             type="submit"
-            className="w-full p-3 rounded-md text-white font-medium mt-2"
-            style={{ background: colors.deepTeal }}
+            className="w-full p-3 mt-3 rounded-lg font-medium text-white
+        bg-gradient-to-r from-purple-500 to-indigo-500
+        
+        hover:shadow-[0_0_30px_rgba(168,85,247,0.5)]
+        transition"
           >
             Continue
           </button>
         )}
       </form>
 
-      <div className="text-xs text-gray-500 mt-4">
+      {/* Footer text */}
+      <div className="text-xs text-purple-200/50 mt-5">
         By continuing you agree this is a prototype demo. Your info stays in
         your browser.
       </div>
 
       <button
-        className="px-3 py-1.5 mt-2 rounded-md cursor-pointer text-sm bg-teal-50 text-teal-700 hover:bg-teal-100"
+        className="mt-3 text-sm px-4 py-2 rounded-lg
+    bg-purple-500/10 text-purple-300
+    hover:bg-purple-500/20 transition"
         onClick={handleRef}
       >
         Use demo credentials
